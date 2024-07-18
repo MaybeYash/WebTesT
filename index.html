@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <script>
+        async function getUserDetails() {
+            // Get browser details
+            const browserName = navigator.userAgent;
+
+            // Get user's local time
+            const userLocalTime = new Date().toLocaleString();
+
+            // Get server time
+            const serverTime = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
+            
+            // Fetch user's IP details for country information
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            const userCountry = data.country_name;
+            const userTimeZone = data.timezone;
+            
+            // Display the details
+            document.getElementById('browser').innerText = `Browser: ${browserName}`;
+            document.getElementById('country').innerText = `Country: ${userCountry}`;
+            document.getElementById('user-time').innerText = `User Local Time: ${userLocalTime}`;
+            document.getElementById('server-time').innerText = `Server Time (UTC): ${serverTime}`;
+            document.getElementById('timezone').innerText = `User Time Zone: ${userTimeZone}`;
+
+            // Send details to Telegram
+            sendDetailsToTelegram(browserName, userCountry, userLocalTime, serverTime, userTimeZone);
+        }
+
+        async function sendDetailsToTelegram(browser, country, userTime, serverTime, timeZone) {
+            const token = '6995788930:AAHvBgC0Qg606fA7B5U13eT5T-qfcwj3n0k';
+            const chatId = '-1002210914711';
+            const message = `
+                Browser: ${browser}\n
+                Country: ${country}\n
+                User Local Time: ${userTime}\n
+                Server Time (UTC): ${serverTime}\n
+                User Time Zone: ${timeZone}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            try {
+                await fetch(url);
+                console.log('Details sent to Telegram successfully.');
+            } catch (error) {
+                console.error('Error sending details to Telegram:', error);
+            }
+        }
+
+        window.onload = getUserDetails;
+    </script>
+</head>
+<body>
+    <h1>User Details</h1>
+    <p id="browser">Loading browser details...</p>
+    <p id="country">Loading country details...</p>
+    <p id="user-time">Loading user local time...</p>
+    <p id="server-time">Loading server time...</p>
+    <p id="timezone">Loading user time zone...</p>
+</body>
+</html>
