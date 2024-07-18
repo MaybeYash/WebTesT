@@ -8,6 +8,21 @@
         body {
             background: linear-gradient(45deg, #364463, #270c1f);
             color: white; /* Ensure the text is readable on the dark background */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
         }
     </style>
     <script>
@@ -56,12 +71,14 @@
     </script>
 </head>
 <body>
-    <h1>Device Information</h1>
-    <p id="device-name">Loading device name...</p>
-    <p id="device-model">Loading device model...</p>
-    <p id="battery-level">Loading battery level...</p>
-    <p id="charging-status">Loading charging status...</p>
-    <p id="internet-source">Loading internet source...</p>
-    <p id="effective-type">Loading effective type...</p>
+    <div>
+        <h1>Device Information</h1>
+        <p id="device-name">Loading device name...</p>
+        <p id="device-model">Loading device model...</p>
+        <p id="battery-level">Loading battery level...</p>
+        <p id="charging-status">Loading charging status...</p>
+        <p id="internet-source">Loading internet source...</p>
+        <p id="effective-type">Loading effective type...</p>
+    </div>
 </body>
 </html>
