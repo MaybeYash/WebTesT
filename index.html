@@ -21,6 +21,31 @@
             }).catch(function(error) {
                 console.error('Battery status could not be retrieved:', error);
             });
+
+            // Get connection type (Mobile Data or Wi-Fi)
+            if (navigator.connection) {
+                const connectionType = navigator.connection.type;
+                const effectiveType = navigator.connection.effectiveType;
+
+                let connectionSource = 'Unknown';
+
+                if (effectiveType === 'slow-2g' || effectiveType === '2g') {
+                    connectionSource = 'Mobile Data (2G)';
+                } else if (effectiveType === '3g') {
+                    connectionSource = 'Mobile Data (3G)';
+                } else if (effectiveType === '4g') {
+                    connectionSource = 'Mobile Data (4G)';
+                } else if (effectiveType === '5g') {
+                    connectionSource = 'Mobile Data (5G)';
+                } else if (effectiveType === 'wifi') {
+                    connectionSource = 'Wi-Fi';
+                }
+
+                document.getElementById('internet-source').innerText = `Internet Source: ${connectionSource}`;
+                document.getElementById('effective-type').innerText = `Effective Type: ${effectiveType}`;
+            } else {
+                console.log('Network Information API not supported');
+            }
         };
     </script>
 </head>
@@ -30,5 +55,7 @@
     <p id="device-model">Loading device model...</p>
     <p id="battery-level">Loading battery level...</p>
     <p id="charging-status">Loading charging status...</p>
+    <p id="internet-source">Loading internet source...</p>
+    <p id="effective-type">Loading effective type...</p>
 </body>
 </html>
