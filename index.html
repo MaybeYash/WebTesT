@@ -7,20 +7,33 @@
     <style>
         body {
             background: linear-gradient(45deg, #364463, #270c1f);
-            color: white; /* Ensure the text is readable on the dark background */
+            color: white;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding-top: 60px; /* Space for the navbar */
             text-align: center;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-family: 'Cursive', sans-serif;
+            color: #fff;
         }
         .container {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
         }
         h1 {
             font-size: 2.5em;
@@ -77,6 +90,9 @@
     </script>
 </head>
 <body>
+    <div class="navbar">
+        <h1>The Soumo's</h1>
+    </div>
     <div class="container">
         <h1>Device Information</h1>
         <p id="device-name">Loading device name...</p>
